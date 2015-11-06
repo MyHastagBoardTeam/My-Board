@@ -1,0 +1,24 @@
+﻿<Window x:Class="MyHAstTagBoard.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:MyHAstTagBoard"
+        mc:Ignorable="d"
+        Title="My#TagBoard" Height="350" Width="600.927" MinHeight="300" MinWidth="500">
+    <Grid Margin="0,0,0,0">
+        <ListView x:Name="RequestedEvents" Margin="10,35,254,10" RenderTransformOrigin="0.516,0.239">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn/>
+                </GridView>
+            </ListView.View>
+        </ListView>
+        <Button x:Name="InfoButton" Content="Info" Margin="0,227,170,0" VerticalAlignment="Top" RenderTransformOrigin="0.507,0.591" HorizontalAlignment="Right" Width="69"/>
+        <Button x:Name="SourceButton" Content="Source" Margin="0,227,90,0" VerticalAlignment="Top" RenderTransformOrigin="0.12,0.636" HorizontalAlignment="Right" Width="75"/>
+        <Button x:Name="PurchaseButton" Content="Buy now" Margin="0,227,10,0" VerticalAlignment="Top" RenderTransformOrigin="0.52,0.5" HorizontalAlignment="Right" Width="75" KeyDown="KeyDown_Press"/>
+        <WebBrowser Name="GoogleMapBrowser" Height="212" Margin="0,10,10,0" VerticalAlignment="Top" HorizontalAlignment="Right" Width="229"/>
+        <ComboBox x:Name="CategoriesBox" Margin="10,8,254,0" VerticalAlignment="Top" Height="22" SelectedValuePath="Key" DisplayMemberPath="Value" SelectionChanged="Category_Changed"/>
+
+    </Grid>
+</Window>
