@@ -19,6 +19,7 @@
         <Button x:Name="PurchaseButton" Content="Buy now" Margin="0,227,10,0" VerticalAlignment="Top" RenderTransformOrigin="0.52,0.5" HorizontalAlignment="Right" Width="75"/>
         <WebBrowser Name="GoogleMapBrowser" Height="212" Margin="0,10,10,0" VerticalAlignment="Top" HorizontalAlignment="Right" Width="229"/>
         <ComboBox x:Name="CategoriesBox" Margin="10,8,254,0" VerticalAlignment="Top" Height="22" SelectedValuePath="Key" DisplayMemberPath="Value" SelectionChanged="Category_Changed"/>
+        <Label x:Name="status" HorizontalAlignment="Left" Content="Ready" Margin="553,252,0,0" Height="27" VerticalAlignment="Top" Width="229"/>
 
     </Grid>
 </Window>

@@ -6,14 +6,18 @@ using System.Xml;
 using System.Text.RegularExpressions;
 using System.Windows.Media;
 using System.Windows.Controls;
+using System.ComponentModel;
+using System.Windows.Data;
 using System.Windows.Threading;
 using System.Threading.Tasks;
 
 namespace MyHAstTagBoard
 {
+    
 
     public class RequestController
     {
+        Func<string, List<TextBlock>> tbL = null;
         object locker = new object();
         private ITEvent currentEvent = null;
         private Media attachedMedia = null;
@@ -24,12 +28,11 @@ namespace MyHAstTagBoard
             window = win;
             currentEvent = new ITEvent();
             attachedMedia = new Media();
-            window.CategoriesBox.SelectionChanged += ChangeCategory;
             window.InfoButton.Click += InfoButton_Click;
             window.SourceButton.Click += SourceButton_Click;
             window.PurchaseButton.Click += PurchaseButton_Click;
             window.CategoriesBox.ItemsSource = currentEvent.categories;
-            Func<string, List<string>> tbL = ParseRSS;
+            Func<string, List<TextBlock>> tbL = ParseRSS;
         }
 
         private void PurchaseButton_Click(object sender, System.Windows.RoutedEventArgs e)
@@ -51,30 +54,34 @@ namespace MyHAstTagBoard
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        public void ChangeCategory(object sender, SelectionChangedEventArgs e)
-        {
-            var me = sender as System.Windows.Controls.ComboBox;
-            string url = me.SelectedValue.ToString();
-            SynchronizationContext syncMainTool = SynchronizationContext.Current;
+        //public void ChangeCategory(object sender, SelectionChangedEventArgs e)
+        //{
+        //    var me = sender as System.Windows.Controls.ComboBox;
 
-            Task<List<string>>.Factory.StartNew((i) =>
-            {
-                return ParseRSS(url);
-            }, null)
+        //    Task<List<TextBlock>>.Factory.StartNew((i) =>
+        //    {
+        //        return ParseRSS(me.SelectedValue.ToString());
+        //    }, me.SelectedValue.ToString())
 
-            .ContinueWith((previousTask) =>
-            {
-                var result = previousTask.Result;
-                syncMainTool.Post(empty => window.RequestedEvents.ItemsSource = result, null);
-            });
-        }
+        //    .ContinueWith((previousTask) =>
+        //    {
+        //        var result = previousTask.Result;
+        //        window.RequestedEvents.Dispatcher.Invoke(() =>
+        //        { 
+        //            window.RequestedEvents.ItemsSource = result;
+        //            ICollectionView view = CollectionViewSource.GetDefaultView(window.RequestedEvents.ItemsSource);
+        //            view.Refresh();
+        //        });
+        //    });
+        //    System.Windows.Forms.MessageBox.Show(Thread.CurrentThread.ManagedThreadId.ToString());
+        //}
         /// <summary>
         /// Parses rss
         /// </summary>
         /// <param name="rss">object rss</param>
-        public List<string> ParseRSS(string rss)
+        public List<TextBlock> ParseRSS(string rss)
         {
-            List<string> Events = new List<string>();
+            List<TextBlock> Events = new List<TextBlock>();
             lock (locker)
             {
                 string rssUrl = (string)rss;
@@ -102,9 +109,15 @@ namespace MyHAstTagBoard
                         rssContent.Append("<a href='" + currentEvent.Source + "'>" + currentEvent.Title + "</a><br>\n" + currentEvent.Content);
                     }
                     rssContent.Append("<a href='" + currentEvent.Source + "'>" + currentEvent.Title + "</a><br>\n");
-                    Events.Add(currentEvent.Title + currentEvent.Content);
+                    TextBlock tb = new TextBlock();
+                    tb.LineHeight = 0.8d;
+                    tb.Background = Brushes.AntiqueWhite;
+                    tb.FontSize = 10;
+                    tb.Foreground = Brushes.DarkBlue;
+                    tb.Text = currentEvent.Content;
+                    Events.Add(tb);
                 }
-
+                
             }
             return Events;
         }

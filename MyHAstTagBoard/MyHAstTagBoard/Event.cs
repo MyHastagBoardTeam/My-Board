@@ -12,9 +12,9 @@ namespace MyHAstTagBoard
         public string Content { get; set; }
         public Guid ID
         {
-            set
+            get
             {
-                value = new Guid();
+                return new Guid();
             }
         }
         public List<Media> MediaFiles { get; set; }
