@@ -4,9 +4,7 @@ using System.Threading;
 using System.Text;
 using System.Xml;
 using System.Text.RegularExpressions;
-using System.Windows.Media;
 using System.Windows.Controls;
-using System.Windows.Threading;
 using System.Threading.Tasks;
 
 namespace MyHAstTagBoard
@@ -35,22 +33,6 @@ namespace MyHAstTagBoard
             Func<string, List<string>> parsingRssdelegate = ParseRSS;
         }
 
-        private void PurchaseButton_Click(object sender, System.Windows.RoutedEventArgs e)
-        {
-            throw new NotImplementedException();
-        }
-
-        private void SourceButton_Click(object sender, System.Windows.RoutedEventArgs e)
-        {
-            throw new NotImplementedException();
-        }
-
-        private void InfoButton_Click(object sender, System.Windows.RoutedEventArgs e)
-        {
-
-           // _eventPageController = new EventPageController();
-            _eventWindow.Show();
-        }
         private void OnSelectedEvent(object sender, EventArgs e)
         {
             var ev = sender as ListView;
@@ -91,7 +73,7 @@ namespace MyHAstTagBoard
         /// <param name="e"></param>
         public void ChangeCategory(object sender, SelectionChangedEventArgs e)
         {
-            var me = sender as System.Windows.Controls.ComboBox;
+            var me = sender as ComboBox;
             string url = me.SelectedValue.ToString();
             SynchronizationContext syncMainTool = SynchronizationContext.Current;
 

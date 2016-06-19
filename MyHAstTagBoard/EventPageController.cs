@@ -1,17 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.ComponentModel;
 
 namespace MyHAstTagBoard
 {
-    public class EventPageController : INotifyPropertyChanged
+    public class EventPageController 
     {
         private EventInfoWindow _eventWindow;
         private Uri _HTMLpageUrl;
-        public event PropertyChangedEventHandler PropertyChanged;
+
         public EventPageController(EventInfoWindow window, Uri htmlPageUrl)
         {
             _eventWindow = window;
