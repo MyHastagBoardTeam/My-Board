@@ -75,6 +75,10 @@ namespace MyHAstTagBoard
             _rssXmlEventsList = rssXmlDoc.SelectNodes("rss/channel/item/link");
             foreach (XmlNode node in _rssXmlEventsList)
             {
+                if (temp == node.InnerText)
+                {
+                    break;
+                }
                 temp = node.InnerText;
             }
             Uri returningUri = new Uri(temp);

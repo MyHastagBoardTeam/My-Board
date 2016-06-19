@@ -3,10 +3,13 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:cefSharp="clr-namespace:CefSharp.Wpf;assembly=CefSharp.Wpf"
         xmlns:local="clr-namespace:MyHAstTagBoard"
         mc:Ignorable="d"
-        Title="EventInfoWindow" Height="500" Width="850">
+        Title="EventInfoWindow" Height="600" Width="850">
     <Grid>
-        <WebBrowser Name="EventPageHTML" Margin="10"/>
+        <!--<WebBrowser Name="EventPageHTML" Margin="10"/>-->
+        <cefSharp:ChromiumWebBrowser Grid.Row="0" Name="Browser"
+                Address="{Binding Path=URL}"/>
     </Grid>
 </Window>
