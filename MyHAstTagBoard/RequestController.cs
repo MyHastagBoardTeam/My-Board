@@ -29,9 +29,6 @@ namespace MyHAstTagBoard
             currentEvent = new ITEventsList();
             attachedMedia = new MediaContent();
             window.CategoriesBox.SelectionChanged += ChangeCategory;
-            window.InfoButton.Click += InfoButton_Click;
-            window.SourceButton.Click += SourceButton_Click;
-            window.PurchaseButton.Click += PurchaseButton_Click;
             window.RequestedEvents.SelectionChanged += OnSelectedEvent;
             window.CategoriesBox.ItemsSource = currentEvent.categories;
             _eventWindow = new EventInfoWindow();
@@ -54,7 +51,7 @@ namespace MyHAstTagBoard
            // _eventPageController = new EventPageController();
             _eventWindow.Show();
         }
-        private void OnSelectedEvent(object sender, SelectionChangedEventArgs e)
+        private void OnSelectedEvent(object sender, EventArgs e)
         {
             var ev = sender as ListView;
             int counter = ev.SelectedIndex;

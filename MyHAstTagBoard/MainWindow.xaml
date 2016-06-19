@@ -5,20 +5,17 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:MyHAstTagBoard"
         mc:Ignorable="d"
-        Title="My#TagBoard" Height="350" Width="600.927" MinHeight="300" MinWidth="800">
-    <Grid Margin="0,0,0,0">
-        <ListView x:Name="RequestedEvents" Margin="10,35,254,10" RenderTransformOrigin="0.516,0.239">
+        Title="My#TagBoard" Height="419" Width="738" MinHeight="300" MinWidth="800">
+    <Grid Margin="0,0,0,0" Background="#FF172734">
+        <ListView x:Name="RequestedEvents" Margin="10,60,10,10" RenderTransformOrigin="0.516,0.239">
             <ListView.View>
                 <GridView>
                     <GridViewColumn/>
                 </GridView>
             </ListView.View>
         </ListView>
-        <Button x:Name="InfoButton" Content="Info" Margin="0,227,170,0" VerticalAlignment="Top" RenderTransformOrigin="0.507,0.591" HorizontalAlignment="Right" Width="69"/>
-        <Button x:Name="SourceButton" Content="Source" Margin="0,227,90,0" VerticalAlignment="Top" RenderTransformOrigin="0.12,0.636" HorizontalAlignment="Right" Width="75"/>
-        <Button x:Name="PurchaseButton" Content="Buy now" Margin="0,227,10,0" VerticalAlignment="Top" RenderTransformOrigin="0.52,0.5" HorizontalAlignment="Right" Width="75"/>
-        <WebBrowser Name="GoogleMapBrowser" Height="212" Margin="0,10,10,0" VerticalAlignment="Top" HorizontalAlignment="Right" Width="229"/>
-        <ComboBox x:Name="CategoriesBox" Margin="10,8,254,0" VerticalAlignment="Top" Height="22" SelectedValuePath="Key" DisplayMemberPath="Value"/>
+        <ComboBox x:Name="CategoriesBox" Margin="10,0,10,333" VerticalAlignment="Bottom" Height="22" SelectedValuePath="Key" DisplayMemberPath="Value"/>
+        <Label x:Name="label" Content="Доступные мероприятия на текущий момент:" HorizontalAlignment="Left" Margin="10,2,0,0" VerticalAlignment="Top" Width="336" Foreground="#FFF3E9E1"/>
 
     </Grid>
 </Window>
