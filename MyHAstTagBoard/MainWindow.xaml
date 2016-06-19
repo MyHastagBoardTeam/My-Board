@@ -14,7 +14,7 @@
                 </GridView>
             </ListView.View>
         </ListView>
-        <ComboBox x:Name="CategoriesBox" Margin="10,0,10,333" VerticalAlignment="Bottom" Height="22" SelectedValuePath="Key" DisplayMemberPath="Value"/>
+        <ComboBox x:Name="CategoriesBox" Margin="10,33,10,0" SelectedValuePath="Key" DisplayMemberPath="Value" Height="22" VerticalAlignment="Top"/>
         <Label x:Name="label" Content="Доступные мероприятия на текущий момент:" HorizontalAlignment="Left" Margin="10,2,0,0" VerticalAlignment="Top" Width="336" Foreground="#FFF3E9E1"/>
 
     </Grid>
