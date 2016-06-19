@@ -18,6 +18,10 @@ namespace MyHAstTagBoard
         private ITEventsList currentEvent = null;
         private MediaContent attachedMedia = null;
         private MainWindow window = null;
+        private EventInfoWindow _eventWindow;
+        private EventPageController _eventPageController;
+        private XmlNodeList _rssXmlEventsList;
+        private List<string> _events;
 
         public RequestController(MainWindow win)
         {
@@ -28,7 +32,9 @@ namespace MyHAstTagBoard
             window.InfoButton.Click += InfoButton_Click;
             window.SourceButton.Click += SourceButton_Click;
             window.PurchaseButton.Click += PurchaseButton_Click;
+            window.RequestedEvents.SelectionChanged += OnSelectedEvent;
             window.CategoriesBox.ItemsSource = currentEvent.categories;
+            _eventWindow = new EventInfoWindow();
             Func<string, List<string>> parsingRssdelegate = ParseRSS;
         }
 
@@ -44,7 +50,38 @@ namespace MyHAstTagBoard
 
         private void InfoButton_Click(object sender, System.Windows.RoutedEventArgs e)
         {
-            throw new NotImplementedException();
+
+           // _eventPageController = new EventPageController();
+            _eventWindow.Show();
+        }
+        private void OnSelectedEvent(object sender, SelectionChangedEventArgs e)
+        {
+            var ev = sender as ListView;
+            int counter = ev.SelectedIndex;
+            var node = _rssXmlEventsList.Item(counter);
+            _eventWindow = new EventInfoWindow();
+            _eventPageController = new EventPageController(_eventWindow, GetEventUri(node));
+            _eventWindow.Show();  
+        }
+        /// <summary>
+        /// Get pgae url for rendering at the UI
+        /// </summary>
+        /// <param name="rssNode">XmlNode thatshould be parsed for searching a page link</param>
+        /// <returns>return an Uri instance, that contains HTML page URL</returns>
+        private Uri GetEventUri(XmlNode rssNode)
+        {
+            var uri = rssNode.FirstChild.BaseURI;
+            string temp = null;
+            string ur = rssNode.InnerText;
+            XmlDocument rssXmlDoc = new XmlDocument();
+            rssXmlDoc.Load(rssNode.BaseURI);
+            _rssXmlEventsList = rssXmlDoc.SelectNodes("rss/channel/item/link");
+            foreach (XmlNode node in _rssXmlEventsList)
+            {
+                temp = node.InnerText;
+            }
+            Uri returningUri = new Uri(temp);
+            return returningUri;
         }
         /// <summary>
         /// Shows the search result of parsing from URLs in a TextBlock async 
@@ -74,16 +111,16 @@ namespace MyHAstTagBoard
         /// <param name="rss">object rss</param>
         public List<string> ParseRSS(string rss)
         {
-            List<string> Events = new List<string>();
+            _events = new List<string>();
             lock (locker)
             {
                 string rssUrl = (string)rss;
                 XmlDocument rssXmlDoc = new XmlDocument();
                 rssXmlDoc.Load(rssUrl);
-                XmlNodeList rssNodes = rssXmlDoc.SelectNodes("rss/channel/item");
+                _rssXmlEventsList = rssXmlDoc.SelectNodes("rss/channel/item");
                 StringBuilder rssContent = new StringBuilder();
 
-                foreach (XmlNode node in rssNodes)
+                foreach (XmlNode node in _rssXmlEventsList)
                 {
 
                     XmlNode rssSubNode = node.SelectSingleNode("title");
@@ -102,11 +139,11 @@ namespace MyHAstTagBoard
                         rssContent.Append("<a href='" + currentEvent.Source + "'>" + currentEvent.Title + "</a><br>\n" + currentEvent.Content);
                     }
                     rssContent.Append("<a href='" + currentEvent.Source + "'>" + currentEvent.Title + "</a><br>\n");
-                    Events.Add(currentEvent.Title + currentEvent.Content);
+                    _events.Add(currentEvent.Title + currentEvent.Content);
                 }
 
             }
-            return Events;
+            return _events;
         }
     }
 }
