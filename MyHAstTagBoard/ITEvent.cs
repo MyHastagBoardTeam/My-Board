@@ -7,13 +7,14 @@ using System.Threading.Tasks;
 namespace MyHAstTagBoard
 {
 
-    public class ITEvent : Event
+    public class ITEventsList : EventList
     {
         public List<Uri> Source = new List<Uri>();
 
         public enum Categories
         {
-            All, NET, Agile, FrontEnd, GameDev, Hardware, HR, Java, JAvaScript, Mobile, Python, QA, Ruby, UX, Hakaton
+            All, NET, Agile, FrontEnd, GameDev, Hardware, HR, Java,
+            JAvaScript, Mobile, Python, QA, Ruby, UX, Hakaton
         }
 
         public override Dictionary<string, string> categories

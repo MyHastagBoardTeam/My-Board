@@ -15,21 +15,21 @@ namespace MyHAstTagBoard
     public class RequestController
     {
         object locker = new object();
-        private ITEvent currentEvent = null;
-        private Media attachedMedia = null;
+        private ITEventsList currentEvent = null;
+        private MediaContent attachedMedia = null;
         private MainWindow window = null;
 
         public RequestController(MainWindow win)
         {
             window = win;
-            currentEvent = new ITEvent();
-            attachedMedia = new Media();
+            currentEvent = new ITEventsList();
+            attachedMedia = new MediaContent();
             window.CategoriesBox.SelectionChanged += ChangeCategory;
             window.InfoButton.Click += InfoButton_Click;
             window.SourceButton.Click += SourceButton_Click;
             window.PurchaseButton.Click += PurchaseButton_Click;
             window.CategoriesBox.ItemsSource = currentEvent.categories;
-            Func<string, List<string>> tbL = ParseRSS;
+            Func<string, List<string>> parsingRssdelegate = ParseRSS;
         }
 
         private void PurchaseButton_Click(object sender, System.Windows.RoutedEventArgs e)
@@ -47,7 +47,7 @@ namespace MyHAstTagBoard
             throw new NotImplementedException();
         }
         /// <summary>
-        /// Shows the search result in a TextBlock async 
+        /// Shows the search result of parsing from URLs in a TextBlock async 
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>

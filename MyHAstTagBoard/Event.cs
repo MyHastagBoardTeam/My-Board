@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace MyHAstTagBoard
 {
-    public abstract class Event
+    public abstract class EventList
     {
         public string Title { get; set; }
         public string Content { get; set; }
@@ -17,7 +17,7 @@ namespace MyHAstTagBoard
                 value = new Guid();
             }
         }
-        public List<Media> MediaFiles { get; set; }
+        public List<MediaContent> MediaFiles { get; set; }
         public abstract Dictionary<string, string> categories { get; }
     }
 }

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace MyHAstTagBoard
 {
-    public class Media
+    public class MediaContent
     {
         public Guid ID
         {
